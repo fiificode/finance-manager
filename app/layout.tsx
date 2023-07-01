@@ -1,8 +1,10 @@
 import './globals.css'
 import { Ubuntu } from 'next/font/google'
-import Sidebar from './sidebar/Sidebar'
+import dynamic from 'next/dynamic'
+// import Sidebar from '../components/sidebar/Sidebar'
 
 const inter = Ubuntu({ weight:"400", subsets: ['latin'] })
+const Sidebar = dynamic(() => import("../components/sidebar/Sidebar"),{ssr:false});
 
 export const metadata = {
   title: 'Cedis Manager',

@@ -1,5 +1,5 @@
-"use client";
 
+"use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -9,11 +9,10 @@ import Link from "next/link";
 import { IoIosArrowBack } from "react-icons/io";
 
 import { sideNavigationItems } from "./SubMenu";
-import { classNames } from "../../components/classNames";
+import { classNames } from "../classNames";
 
 const Sidebar = () => {
-
-  const pathname = window.location.pathname;
+  const [isOpen, setIsOpen] = useState(true);
   const Sidebar_animation = {
     open: {
       width: "16rem",
@@ -28,7 +27,8 @@ const Sidebar = () => {
       },
     },
   };
-  const [isOpen, setIsOpen] = useState(true);
+
+
 
   return (
     <div>
@@ -55,8 +55,8 @@ const Sidebar = () => {
             <li>
               {sideNavigationItems?.map((item) => {
                 const isMenuActive =
-                  item.href === pathname ||
-                  (pathname.includes(item?.href) &&
+                  item.href === window.location.pathname ||
+                  (window.location.pathname.includes(item?.href) &&
                     item?.subNavigation &&
                     item?.subNavigation?.length > 0 &&
                     item.subNavigation.some(({ href }: any) =>
@@ -78,7 +78,7 @@ const Sidebar = () => {
                       <span className="ml-3 text-base pt-0.5">{item.name}</span>
                     </Link>
 
-                    {pathname.includes(item?.href) &&
+                    {window.location.pathname.includes(item?.href) &&
                     item?.subNavigation &&
                     item?.subNavigation?.length > 0
                       ? item?.subNavigation?.map((innerItem) => {
@@ -87,7 +87,7 @@ const Sidebar = () => {
                               key={innerItem?.name}
                               href={innerItem.href}
                               className={classNames(
-                                innerItem.href === pathname
+                                innerItem.href === window.location.pathname
                                   ? "text-black"
                                   : "text-black",
                                 "group flex items-center px-5 py-1.5 text-sm font-normal rounded-l-full"
